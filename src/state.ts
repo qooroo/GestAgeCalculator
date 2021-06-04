@@ -11,6 +11,11 @@ import {
 } from 'rxjs/operators'
 import { bind, shareLatest, SUSPENSE } from '@react-rxjs/core'
 
+export enum Target {
+    GestAgeAtDate,
+    DateAtGestAge
+}
+
 export interface GestAge {
     weeks: number,
     days: number
@@ -29,7 +34,21 @@ export const [useCurrentBirthGestAge, currentBirthGestAge$] = bind(
         startWith({
             weeks: INITIAL_BIRTH_GEST_WEEKS,
             days: INITIAL_BIRTH_GEST_DAYS,
-        })
+        } as GestAge)
+    )
+)
+
+const dateGestAge$ = new Subject<GestAge>()
+export const onDateGestAgeChange = (gestAge: GestAge) => {
+    dateGestAge$.next(gestAge)
+}
+
+export const [useCurrentDateGestAge, currentDateGestAge$] = bind(
+    dateGestAge$.pipe(
+        startWith({
+            weeks: 0,
+            days: 0,
+        } as GestAge)
     )
 )
 
@@ -41,13 +60,13 @@ export const onBirthdayChange = (birthday: Date) => {
 export const currentGestAgeAndBirthday$ = merge(
     currentBirthGestAge$.pipe(
         map((currentBirthGestAge) => ({
-            ...currentBirthGestAge,
-            birthday: Date.now,
+            currentBirthGestAge,
+            birthday: new Date(),
         }))
     ),
     birthday$.pipe(
         withLatestFrom(currentBirthGestAge$),
-        map(([birthday, currentBirthGestAge]) => ({ ...currentBirthGestAge, birthday }))
+        map(([birthday, currentBirthGestAge]) => ({ currentBirthGestAge, birthday }))
     )
 ).pipe(shareLatest())
 
