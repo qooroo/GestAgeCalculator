@@ -1,15 +1,11 @@
-import { Subject, merge, EMPTY } from 'rxjs'
+import { Subject, merge } from 'rxjs'
 import {
     startWith,
     withLatestFrom,
     map,
-    pluck,
-    filter,
-    switchMap,
-    switchMapTo,
-    catchError,
+    pluck
 } from 'rxjs/operators'
-import { bind, shareLatest, SUSPENSE } from '@react-rxjs/core'
+import { bind, shareLatest } from '@react-rxjs/core'
 
 export enum Target {
     GestAgeAtDate,
@@ -46,8 +42,8 @@ export const onDateGestAgeChange = (gestAge: GestAge) => {
 export const [useCurrentDateGestAge, currentDateGestAge$] = bind(
     dateGestAge$.pipe(
         startWith({
-            weeks: 0,
-            days: 0,
+            weeks: INITIAL_BIRTH_GEST_WEEKS,
+            days: INITIAL_BIRTH_GEST_DAYS,
         } as GestAge)
     )
 )

@@ -2,13 +2,12 @@ import React, { ChangeEvent, useState } from 'react';
 import DatePicker from 'react-datepicker'
 import {
   onBirthGestAgeChange,
-  onDateGestAgeChange,
   onBirthdayChange,
   currentGestAgeAndBirthday$,
   useCurrentBirthGestAge,
+  onDateGestAgeChange,
   useCurrentDateGestAge,
   useCurrentBirthday,
-  currentBirthGestAge$,
   Target
 } from './state'
 import Radio from '@material-ui/core/Radio';
@@ -29,23 +28,24 @@ type ChangeHandler = (e: InputEvent) => void
 
 function App() {
 
-  const { birthWeeks, birthDays } = useCurrentBirthGestAge() as any
-  const { dateWeeks, dateDays } = useCurrentDateGestAge() as any
+  const birthGestAge = useCurrentBirthGestAge()
 
   const onBirthGestAgeWeeksChanged: ChangeHandler = (e) => {
-    onBirthGestAgeChange({ weeks: Number(e.target.value), days: birthDays })
+    onBirthGestAgeChange({ weeks: Number(e.target.value), days: birthGestAge.days })
   }
 
   const onBirthGestAgeDaysChanged: ChangeHandler = (e) => {
-    onBirthGestAgeChange({ weeks: birthWeeks, days: Number(e.target.value) })
+    onBirthGestAgeChange({ weeks: birthGestAge.weeks, days: Number(e.target.value) })
   }
 
+  const dateGestAge = useCurrentDateGestAge()
+
   const onDateGestAgeWeeksChanged: ChangeHandler = (e) => {
-    onDateGestAgeChange({ weeks: Number(e.target.value), days: birthDays })
+    onDateGestAgeChange({ weeks: Number(e.target.value), days: dateGestAge.days })
   }
 
   const onDateGestAgeDaysChanged: ChangeHandler = (e) => {
-    onDateGestAgeChange({ weeks: birthWeeks, days: Number(e.target.value) })
+    onDateGestAgeChange({ weeks: dateGestAge.weeks, days: Number(e.target.value) })
   }
 
   currentGestAgeAndBirthday$.subscribe(x => {
@@ -62,9 +62,9 @@ function App() {
     <div className="App">
       <p>Gestational age at birth</p>
       <div>
-        <input name="birth-gest-weeks" onChange={onBirthGestAgeWeeksChanged} value={birthWeeks}></input>
+        <input name="birth-gest-weeks" onChange={onBirthGestAgeWeeksChanged} value={birthGestAge.weeks}></input>
         Weeks
-        <input name="birth-gest-days" onChange={onBirthGestAgeDaysChanged} value={birthDays}></input>
+        <input name="birth-gest-days" onChange={onBirthGestAgeDaysChanged} value={birthGestAge.days}></input>
         Days
       </div>
       <p>Birthday</p>
@@ -73,9 +73,9 @@ function App() {
       <CalculationDatePicker />
       <p>Gestational age at date</p>
       <div>
-        <input name="date-gest-weeks" onChange={onDateGestAgeWeeksChanged} value={dateWeeks}></input>
+        <input name="date-gest-weeks" onChange={onDateGestAgeWeeksChanged} value={dateGestAge.weeks}></input>
         Weeks
-        <input name="date-gest-days" onChange={onDateGestAgeDaysChanged} value={dateDays}></input>
+        <input name="date-gest-days" onChange={onDateGestAgeDaysChanged} value={dateGestAge.days}></input>
         Days
       </div>
       <FormControl component="fieldset">
