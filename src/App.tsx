@@ -10,7 +10,9 @@ import {
   useCurrentBirthday,
   Target,
   useCurrentCalcDay,
-  onCalcDayChange
+  onCalcDayChange,
+  useCurrentCalcTarget,
+  onCalcTargetChange
 } from './state'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -43,6 +45,7 @@ function App() {
   
   const currentBirthday = useCurrentBirthday()
   const currentCalcDay = useCurrentCalcDay()
+  const currentCalcTarget = useCurrentCalcTarget()
 
   const onDateGestAgeWeeksChanged: ChangeHandler = (e) => {
     onDateGestAgeChange({ weeks: Number(e.target.value), days: dateGestAge.days })
@@ -53,13 +56,11 @@ function App() {
   }
 
   currentGestAgeAndBirthday$.subscribe(x => {
-    console.log(`onChange: ${x.currentBirthGestAge.weeks}/${x.currentBirthGestAge.days} ${currentBirthday} ${currentCalcDay}`)
+    console.log(`onChange: \n${x.currentBirthGestAge.weeks}/${x.currentBirthGestAge.days} \n${currentBirthday} \n${currentCalcDay} \n${currentCalcTarget}`)
   })
 
-  const [value, setValue] = useState(Target.GestAgeAtDate as Number);
-
   const onCalcTargetChanged: ChangeHandler = (e) => {
-    setValue(Number(e.target.value))
+    onCalcTargetChange(Number(e.target.value))
   }
 
   return (
@@ -84,7 +85,7 @@ function App() {
       </div>
       <FormControl component="fieldset">
         <FormLabel component="legend">Calculation Target</FormLabel>
-        <RadioGroup aria-label="target" name="targets" value={value} onChange={onCalcTargetChanged}>
+        <RadioGroup aria-label="target" name="targets" value={currentCalcTarget} onChange={onCalcTargetChanged}>
           <FormControlLabel value={Target.GestAgeAtDate} control={<Radio />} label="Gestational age at date" />
           <FormControlLabel value={Target.DateAtGestAge} control={<Radio />} label="Date at gestational age" />
         </RadioGroup>

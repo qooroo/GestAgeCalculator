@@ -74,3 +74,10 @@ export const currentGestAgeAndBirthday$ = merge(
 ).pipe(shareLatest())
 
 export const [useCurrentBirthday] = bind(currentGestAgeAndBirthday$.pipe(pluck('birthday')))
+
+const calcTarget$ = new Subject<Target>()
+export const onCalcTargetChange = (calcTarget: Target) => {
+    calcTarget$.next(calcTarget)
+}
+
+export const [useCurrentCalcTarget] = bind(calcTarget$.pipe(startWith(Target.GestAgeAtDate)))
