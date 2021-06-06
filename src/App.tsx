@@ -8,7 +8,9 @@ import {
   onDateGestAgeChange,
   useCurrentDateGestAge,
   useCurrentBirthday,
-  Target
+  Target,
+  useCurrentCalcDay,
+  onCalcDayChange
 } from './state'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -16,10 +18,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
-const CalculationDatePicker: React.FC = () => {
-  const currentBirthday = useCurrentBirthday()
+const CalculationDatePicker: React.FC<{selected: any, onChange: any}> = (x) => {
   return (
-    <DatePicker dateFormat="dd/MM/yyyy" selected={currentBirthday} onChange={(d: Date) => onBirthdayChange(d)} />
+    <DatePicker dateFormat="dd/MM/yyyy" selected={x.selected} onChange={x.onChange} />
   );
 }
 
@@ -39,6 +40,9 @@ function App() {
   }
 
   const dateGestAge = useCurrentDateGestAge()
+  
+  const currentBirthday = useCurrentBirthday()
+  const currentCalcDay = useCurrentCalcDay()
 
   const onDateGestAgeWeeksChanged: ChangeHandler = (e) => {
     onDateGestAgeChange({ weeks: Number(e.target.value), days: dateGestAge.days })
@@ -49,7 +53,7 @@ function App() {
   }
 
   currentGestAgeAndBirthday$.subscribe(x => {
-    console.log(`onChange: ${x.currentBirthGestAge.weeks}/${x.currentBirthGestAge.days} ${x.birthday}`)
+    console.log(`onChange: ${x.currentBirthGestAge.weeks}/${x.currentBirthGestAge.days} ${currentBirthday} ${currentCalcDay}`)
   })
 
   const [value, setValue] = useState(Target.GestAgeAtDate as Number);
@@ -68,9 +72,9 @@ function App() {
         Days
       </div>
       <p>Birthday</p>
-      <CalculationDatePicker />
+      <CalculationDatePicker selected={currentBirthday} onChange={(d: Date) => onBirthdayChange(d)} />
       <p>Calculation Date</p>
-      <CalculationDatePicker />
+      <CalculationDatePicker selected={currentCalcDay} onChange={(d: Date) => onCalcDayChange(d)} />
       <p>Gestational age at date</p>
       <div>
         <input name="date-gest-weeks" onChange={onDateGestAgeWeeksChanged} value={dateGestAge.weeks}></input>

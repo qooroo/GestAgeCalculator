@@ -53,6 +53,13 @@ export const onBirthdayChange = (birthday: Date) => {
     birthday$.next(birthday)
 }
 
+const calcDay$ = new Subject<Date>()
+export const onCalcDayChange = (calcDay: Date) => {
+    calcDay$.next(calcDay)
+}
+
+export const [useCurrentCalcDay] = bind(calcDay$.pipe(startWith(new Date())))
+
 export const currentGestAgeAndBirthday$ = merge(
     currentBirthGestAge$.pipe(
         map((currentBirthGestAge) => ({
