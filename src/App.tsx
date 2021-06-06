@@ -19,6 +19,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import { CalculationService } from './calculationService';
+
 
 const CalculationDatePicker: React.FC<{selected: any, onChange: any}> = (x) => {
   return (
@@ -62,6 +64,8 @@ function App() {
   const onCalcTargetChanged: ChangeHandler = (e) => {
     onCalcTargetChange(Number(e.target.value))
   }
+
+  new CalculationService().run()
 
   return (
     <div className="App">
