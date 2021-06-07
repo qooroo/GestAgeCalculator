@@ -13,7 +13,6 @@ import {
   onCalcDayChange,
   useCurrentCalcTarget,
   onCalcTargetChange,
-  GestAge
 } from './state'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -66,28 +65,28 @@ function App() {
 
   return (
     <div className="App">
-      <div className="gest1">
+      <div className="section birthday">
+        <CalculationDatePicker
+          label="Birthday"
+          selected={currentBirthday}
+          onChange={(d: Date) => onBirthdayChange(d)} />
+      </div>
+      <div className="section gest1">
         <GestationalAgeForm
           label="Gestational age at birth"
           onWeeksChange={onBirthGestAgeWeeksChanged}
           onDaysChange={onBirthGestAgeDaysChanged}
           value={birthGestAge} />
       </div>
-      <div className="birthday">
+      <div className="section calcday">
         <CalculationDatePicker
-          label="Birthday"
-          selected={currentBirthday}
-          onChange={(d: Date) => onBirthdayChange(d)} />
-      </div>
-      <div className="calcday">
-        <CalculationDatePicker
-          label="Calculation Date"
+          label="Calculation date"
           selected={currentCalcDay}
           onChange={(d: Date) => onCalcDayChange(d)} />
       </div>
-      <div className="gest2">
+      <div className="section gest2">
         <GestationalAgeForm
-          label="Gestational age at date"
+          label="Gestational age at calculation date"
           onWeeksChange={onDateGestAgeWeeksChanged}
           onDaysChange={onDateGestAgeDaysChanged}
           value={dateGestAge} />
