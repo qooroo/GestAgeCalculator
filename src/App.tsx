@@ -46,20 +46,18 @@ function App() {
   const currentCalcTarget = useCurrentCalcTarget()
 
   const onDateGestAgeWeeksChanged: ChangeHandler = (e) => {
+    onCalcTargetChange(Target.DateAtGestAge)
     onDateGestAgeChange({ weeks: Number(e.target.value), days: dateGestAge.days })
   }
 
   const onDateGestAgeDaysChanged: ChangeHandler = (e) => {
+    onCalcTargetChange(Target.DateAtGestAge)
     onDateGestAgeChange({ weeks: dateGestAge.weeks, days: Number(e.target.value) })
   }
 
   currentGestAgeAndBirthday$.subscribe(x => {
     console.log(`onChange: \n${x.currentBirthGestAge.weeks}/${x.currentBirthGestAge.days} \n${currentBirthday} \n${currentCalcDay} \n${currentCalcTarget}`)
   })
-
-  const onCalcTargetChanged: ChangeHandler = (e) => {
-    onCalcTargetChange(Number(e.target.value))
-  }
 
   new CalculationService().run()
 
@@ -90,15 +88,6 @@ function App() {
           onWeeksChange={onDateGestAgeWeeksChanged}
           onDaysChange={onDateGestAgeDaysChanged}
           value={dateGestAge} />
-      </div>
-      <div className="radios">
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Calculation Target</FormLabel>
-          <RadioGroup aria-label="target" name="targets" value={currentCalcTarget} onChange={onCalcTargetChanged}>
-            <FormControlLabel value={Target.GestAgeAtDate} control={<Radio />} label="Gestational age at date" />
-            <FormControlLabel value={Target.DateAtGestAge} control={<Radio />} label="Date at gestational age" />
-          </RadioGroup>
-        </FormControl>
       </div>
     </div>
   );

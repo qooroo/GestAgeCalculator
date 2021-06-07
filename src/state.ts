@@ -55,6 +55,7 @@ export const onBirthdayChange = (birthday: Date) => {
 
 export const calcDay$ = new Subject<Date>()
 export const onCalcDayChange = (calcDay: Date) => {
+    onCalcTargetChange(Target.GestAgeAtDate)
     calcDay$.next(calcDay)
 }
 
