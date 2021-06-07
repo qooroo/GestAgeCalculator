@@ -12,7 +12,8 @@ import {
   useCurrentCalcDay,
   onCalcDayChange,
   useCurrentCalcTarget,
-  onCalcTargetChange
+  onCalcTargetChange,
+  GestAge
 } from './state'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -22,9 +23,26 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { CalculationService } from './calculationService';
 
 
-const CalculationDatePicker: React.FC<{selected: any, onChange: any}> = (x) => {
+const CalculationDatePicker: React.FC<{ label: String, selected: any, onChange: any }> = (x) => {
   return (
-    <DatePicker dateFormat="dd/MM/yyyy" selected={x.selected} onChange={x.onChange} />
+    <div>
+      <p>{x.label}</p>
+      <DatePicker dateFormat="dd/MM/yyyy" selected={x.selected} onChange={x.onChange} />
+    </div>
+  );
+}
+
+const GestationalAgeForm: React.FC<{ label: String, value: GestAge, onWeeksChange: any, onDaysChange: any }> = (x) => {
+  return (
+    <div>
+      <p>{x.label}</p>
+      <div>
+        <input onChange={x.onWeeksChange} value={x.value.weeks}></input>
+        Weeks
+        <input onChange={x.onDaysChange} value={x.value.days}></input>
+        Days
+      </div>
+    </div>
   );
 }
 
@@ -44,7 +62,7 @@ function App() {
   }
 
   const dateGestAge = useCurrentDateGestAge()
-  
+
   const currentBirthday = useCurrentBirthday()
   const currentCalcDay = useCurrentCalcDay()
   const currentCalcTarget = useCurrentCalcTarget()
@@ -69,24 +87,18 @@ function App() {
 
   return (
     <div className="App">
-      <p>Gestational age at birth</p>
-      <div>
-        <input name="birth-gest-weeks" onChange={onBirthGestAgeWeeksChanged} value={birthGestAge.weeks}></input>
-        Weeks
-        <input name="birth-gest-days" onChange={onBirthGestAgeDaysChanged} value={birthGestAge.days}></input>
-        Days
-      </div>
-      <p>Birthday</p>
-      <CalculationDatePicker selected={currentBirthday} onChange={(d: Date) => onBirthdayChange(d)} />
-      <p>Calculation Date</p>
-      <CalculationDatePicker selected={currentCalcDay} onChange={(d: Date) => onCalcDayChange(d)} />
-      <p>Gestational age at date</p>
-      <div>
-        <input name="date-gest-weeks" onChange={onDateGestAgeWeeksChanged} value={dateGestAge.weeks}></input>
-        Weeks
-        <input name="date-gest-days" onChange={onDateGestAgeDaysChanged} value={dateGestAge.days}></input>
-        Days
-      </div>
+      <GestationalAgeForm
+        label="Gestational age at birth"
+        onWeeksChange={onBirthGestAgeWeeksChanged}
+        onDaysChange={onBirthGestAgeDaysChanged}
+        value={birthGestAge} />
+      <CalculationDatePicker label="Birthday" selected={currentBirthday} onChange={(d: Date) => onBirthdayChange(d)} />
+      <CalculationDatePicker label="Calculation Date" selected={currentCalcDay} onChange={(d: Date) => onCalcDayChange(d)} />      
+      <GestationalAgeForm
+        label="Gestational age at date"
+        onWeeksChange={onDateGestAgeWeeksChanged}
+        onDaysChange={onDateGestAgeDaysChanged}
+        value={dateGestAge} />
       <FormControl component="fieldset">
         <FormLabel component="legend">Calculation Target</FormLabel>
         <RadioGroup aria-label="target" name="targets" value={currentCalcTarget} onChange={onCalcTargetChanged}>
