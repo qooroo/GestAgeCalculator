@@ -14,11 +14,6 @@ import {
   useCurrentCalcTarget,
   onCalcTargetChange,
 } from './state'
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import { CalculationService } from './calculationService';
 import { CalculationDatePicker } from './CalculationDatePicker';
 import { GestationalAgeForm } from './GestationalAgeForm';
@@ -81,10 +76,11 @@ function App() {
           label="Calculation date"
           selected={currentCalcDay}
           onChange={(d: Date) => onCalcDayChange(d)} />
+          <p>total days old: </p>
       </div>
       <div className="section gest2">
         <GestationalAgeForm
-          label="Gestational age at calculation date"
+          label="Corrected gestational age"
           onWeeksChange={onDateGestAgeWeeksChanged}
           onDaysChange={onDateGestAgeDaysChanged}
           value={dateGestAge} />
