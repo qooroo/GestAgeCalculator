@@ -1,9 +1,11 @@
 import {
-  currentGestAgeAndBirthday$,
   onDateGestAgeChange,
   Target,
   calcDay$,
-  calcTarget$
+  calcTarget$,
+  birthday$,
+  birthGestAge$,
+  dateGestAge$
 } from './state'
 import { LocalDate, ChronoUnit } from 'js-joda'
 import { combineLatest } from 'rxjs'
@@ -11,12 +13,12 @@ import { combineLatest } from 'rxjs'
 export class CalculationService {
 
   run() {
-    combineLatest([currentGestAgeAndBirthday$, calcDay$, calcTarget$]).subscribe(x => {
-      if (x[2] === Target.GestAgeAtDate) {
-        const target = x[1]
-        const birthday = x[0].birthday
-        const gestAgeAtBirth = x[0].currentBirthGestAge
-        const targetLocalDate = LocalDate.of(target.getFullYear(), target.getMonth(), target.getDate())
+    combineLatest([calcTarget$, birthday$, birthGestAge$, calcDay$, dateGestAge$]).subscribe(x => {
+      if (x[0] === Target.GestAgeAtDate) {
+        const birthday = x[1]
+        const gestAgeAtBirth = x[2]
+        const targetDay = x[3]
+        const targetLocalDate = LocalDate.of(targetDay.getFullYear(), targetDay.getMonth(), targetDay.getDate())
         const birthdayLocalDate = LocalDate.of(birthday.getFullYear(), birthday.getMonth(), birthday.getDate())
 
         const daysSinceBirthday = ChronoUnit.DAYS.between(birthdayLocalDate, targetLocalDate)

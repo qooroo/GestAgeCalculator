@@ -3,7 +3,8 @@ import {
     startWith,
     withLatestFrom,
     map,
-    pluck
+    pluck,
+    shareReplay
 } from 'rxjs/operators'
 import { bind, shareLatest } from '@react-rxjs/core'
 
@@ -20,65 +21,48 @@ export interface GestAge {
 export const INITIAL_BIRTH_GEST_WEEKS = 28
 export const INITIAL_BIRTH_GEST_DAYS = 0
 
-const birthGestAge$ = new Subject<GestAge>()
+const birthGestAgeSubject = new Subject<GestAge>()
+export const birthGestAge$ = birthGestAgeSubject.pipe(startWith({
+    weeks: INITIAL_BIRTH_GEST_WEEKS,
+    days: INITIAL_BIRTH_GEST_DAYS,
+} as GestAge), shareReplay(1))
 export const onBirthGestAgeChange = (gestAge: GestAge) => {
-    birthGestAge$.next(gestAge)
+    birthGestAgeSubject.next(gestAge)
 }
 
-export const [useCurrentBirthGestAge, currentBirthGestAge$] = bind(
-    birthGestAge$.pipe(
-        startWith({
-            weeks: INITIAL_BIRTH_GEST_WEEKS,
-            days: INITIAL_BIRTH_GEST_DAYS,
-        } as GestAge)
-    )
-)
+export const [useCurrentBirthGestAge, currentBirthGestAge$] = bind(birthGestAge$)
 
-const dateGestAge$ = new Subject<GestAge>()
+const dateGestAgeSubject = new Subject<GestAge>()
+export const dateGestAge$ = dateGestAgeSubject.pipe(startWith({
+    weeks: INITIAL_BIRTH_GEST_WEEKS,
+    days: INITIAL_BIRTH_GEST_DAYS,
+} as GestAge, shareReplay(1)))
 export const onDateGestAgeChange = (gestAge: GestAge) => {
-    dateGestAge$.next(gestAge)
+    dateGestAgeSubject.next(gestAge)
 }
 
-export const [useCurrentDateGestAge, currentDateGestAge$] = bind(
-    dateGestAge$.pipe(
-        startWith({
-            weeks: INITIAL_BIRTH_GEST_WEEKS,
-            days: INITIAL_BIRTH_GEST_DAYS,
-        } as GestAge)
-    )
-)
+export const [useCurrentDateGestAge, currentDateGestAge$] = bind(dateGestAge$)
 
-const birthday$ = new Subject<Date>()
+const birthdaySubject = new Subject<Date>()
+export const birthday$ = birthdaySubject.pipe(startWith(new Date()), shareReplay(1))
 export const onBirthdayChange = (birthday: Date) => {
-    birthday$.next(birthday)
+    birthdaySubject.next(birthday)
 }
 
-export const calcDay$ = new Subject<Date>()
+export const [useCurrentBirthday] = bind(birthday$)
+
+const calcDaySubject = new Subject<Date>()
+export const calcDay$ = calcDaySubject.pipe(startWith(new Date()), shareReplay(1))
 export const onCalcDayChange = (calcDay: Date) => {
     onCalcTargetChange(Target.GestAgeAtDate)
-    calcDay$.next(calcDay)
+    calcDaySubject.next(calcDay)
 }
 
-export const [useCurrentCalcDay] = bind(calcDay$.pipe(startWith(new Date())))
+export const [useCurrentCalcDay] = bind(calcDay$)
 
-export const currentGestAgeAndBirthday$ = merge(
-    currentBirthGestAge$.pipe(
-        map((currentBirthGestAge) => ({
-            currentBirthGestAge,
-            birthday: new Date(),
-        }))
-    ),
-    birthday$.pipe(
-        withLatestFrom(currentBirthGestAge$),
-        map(([birthday, currentBirthGestAge]) => ({ currentBirthGestAge, birthday }))
-    )
-).pipe(shareLatest())
-
-export const [useCurrentBirthday] = bind(currentGestAgeAndBirthday$.pipe(pluck('birthday')))
-
-const calcTargetSubject$ = new Subject<Target>()
+const calcTargetSubject = new Subject<Target>()
+export const calcTarget$ = calcTargetSubject.pipe(startWith(Target.GestAgeAtDate), shareReplay(1))
 export const onCalcTargetChange = (calcTarget: Target) => {
-    calcTargetSubject$.next(calcTarget)
+    calcTargetSubject.next(calcTarget)
 }
-export const calcTarget$ = calcTargetSubject$.pipe(startWith(Target.GestAgeAtDate))
 export const [useCurrentCalcTarget] = bind(calcTarget$)

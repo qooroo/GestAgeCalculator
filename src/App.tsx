@@ -3,7 +3,6 @@ import './App.css';
 import {
   onBirthGestAgeChange,
   onBirthdayChange,
-  currentGestAgeAndBirthday$,
   useCurrentBirthGestAge,
   onDateGestAgeChange,
   useCurrentDateGestAge,
@@ -13,6 +12,7 @@ import {
   onCalcDayChange,
   useCurrentCalcTarget,
   onCalcTargetChange,
+  GestAge
 } from './state'
 import { CalculationService } from './calculationService';
 import { CalculationDatePicker } from './CalculationDatePicker';
@@ -34,7 +34,7 @@ function App() {
     onBirthGestAgeChange({ weeks: birthGestAge.weeks, days: Number(e.target.value) })
   }
 
-  const dateGestAge = useCurrentDateGestAge()
+  const dateGestAge = useCurrentDateGestAge() as GestAge
 
   const currentBirthday = useCurrentBirthday()
   const currentCalcDay = useCurrentCalcDay()
@@ -49,10 +49,6 @@ function App() {
     onCalcTargetChange(Target.DateAtGestAge)
     onDateGestAgeChange({ weeks: dateGestAge.weeks, days: Number(e.target.value) })
   }
-
-  currentGestAgeAndBirthday$.subscribe(x => {
-    console.log(`onChange: \n${x.currentBirthGestAge.weeks}/${x.currentBirthGestAge.days} \n${currentBirthday} \n${currentCalcDay} \n${currentCalcTarget}`)
-  })
 
   new CalculationService().run()
 
