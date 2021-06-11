@@ -63,10 +63,6 @@
     grid-row-end: 4;
 }
 
-.radios {
-    display: none;
-}
-
 .datepick {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     color: white;

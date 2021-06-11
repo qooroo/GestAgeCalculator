@@ -1,18 +1,20 @@
 import { ChangeEvent } from 'react';
 import './App.css';
 import {
-  onBirthGestAgeChange,
+  onBirthGestWeeksChange,
+  onBirthGestDaysChange,
   onBirthdayChange,
-  useCurrentBirthGestAge,
-  onDateGestAgeChange,
-  useCurrentDateGestAge,
+  useCurrentBirthGestWeeks,
+  useCurrentBirthGestDays,
+  onDateGestWeeksChange,
+  onDateGestDaysChange,
+  useCurrentDateGestWeeks,
+  useCurrentDateGestDays,
   useCurrentBirthday,
   Target,
   useCurrentCalcDay,
   onCalcDayChange,
-  useCurrentCalcTarget,
   onCalcTargetChange,
-  GestAge
 } from './state'
 import { CalculationService } from './calculationService';
 import { CalculationDatePicker } from './CalculationDatePicker';
@@ -22,35 +24,34 @@ import { GestationalAgeForm } from './GestationalAgeForm';
 type InputEvent = ChangeEvent<HTMLInputElement>
 type ChangeHandler = (e: InputEvent) => void
 
+new CalculationService().run()
+
+const onBirthGestAgeWeeksChanged: ChangeHandler = (e) => {
+  onBirthGestWeeksChange(Number(e.target.value))
+}
+
+const onBirthGestAgeDaysChanged: ChangeHandler = (e) => {
+  onBirthGestDaysChange(Number(e.target.value))
+}
+
+const onDateGestAgeWeeksChanged: ChangeHandler = (e) => {
+  onCalcTargetChange(Target.DateAtGestAge)
+  onDateGestWeeksChange(Number(e.target.value))
+}
+
+const onDateGestAgeDaysChanged: ChangeHandler = (e) => {
+  onCalcTargetChange(Target.DateAtGestAge)
+  onDateGestDaysChange(Number(e.target.value))
+}
+
 function App() {
 
-  const birthGestAge = useCurrentBirthGestAge()
-
-  const onBirthGestAgeWeeksChanged: ChangeHandler = (e) => {
-    onBirthGestAgeChange({ weeks: Number(e.target.value), days: birthGestAge.days })
-  }
-
-  const onBirthGestAgeDaysChanged: ChangeHandler = (e) => {
-    onBirthGestAgeChange({ weeks: birthGestAge.weeks, days: Number(e.target.value) })
-  }
-
-  const dateGestAge = useCurrentDateGestAge() as GestAge
-
+  const birthGestWeeks = useCurrentBirthGestWeeks()
+  const birthGestDays = useCurrentBirthGestDays()
+  const dateGestWeeks = useCurrentDateGestWeeks()
+  const dateGestDays = useCurrentDateGestDays()
   const currentBirthday = useCurrentBirthday()
   const currentCalcDay = useCurrentCalcDay()
-  const currentCalcTarget = useCurrentCalcTarget()
-
-  const onDateGestAgeWeeksChanged: ChangeHandler = (e) => {
-    onCalcTargetChange(Target.DateAtGestAge)
-    onDateGestAgeChange({ weeks: Number(e.target.value), days: dateGestAge.days })
-  }
-
-  const onDateGestAgeDaysChanged: ChangeHandler = (e) => {
-    onCalcTargetChange(Target.DateAtGestAge)
-    onDateGestAgeChange({ weeks: dateGestAge.weeks, days: Number(e.target.value) })
-  }
-
-  new CalculationService().run()
 
   return (
     <div className="App">
@@ -65,21 +66,24 @@ function App() {
           label="Gestational age at birth"
           onWeeksChange={onBirthGestAgeWeeksChanged}
           onDaysChange={onBirthGestAgeDaysChanged}
-          value={birthGestAge} />
+          weeks={birthGestWeeks}
+          days={birthGestDays}
+           />
       </div>
       <div className="section calcday">
         <CalculationDatePicker
           label="Calculation date"
           selected={currentCalcDay}
           onChange={(d: Date) => onCalcDayChange(d)} />
-          <p>total days old: </p>
+        <p>total days old: </p>
       </div>
       <div className="section gest2">
         <GestationalAgeForm
           label="Corrected gestational age"
           onWeeksChange={onDateGestAgeWeeksChanged}
           onDaysChange={onDateGestAgeDaysChanged}
-          value={dateGestAge} />
+          weeks={dateGestWeeks}
+          days={dateGestDays} />
       </div>
     </div>
   );

@@ -1523,10 +1523,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.1.tgz#cc5d05b0d651445afa519c67824d8af3e43fa10c"
   integrity sha512-sk07ARwL0cMXwkXsqcxyprL/KiEVD0xRFXFqznTnZs1YXqwxEqz6GiGtq2vQlK64CzXDpHX8gw1QQz47abBY1Q==
 
-"@react-rxjs/core@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@react-rxjs/core/-/core-0.3.0.tgz#f47f8a1a214d76e9bd2f1f6c4e0e47c4cd4c544c"
-  integrity sha512-Wlk1027zVFr1Jd+I8V1qHTVv9djq2Nh7u4ODuuC5PQHxIgV1AF+ihHl5cFPolWGEaPqlmxyPKsl5wnSRNkfJ3A==
+"@react-rxjs/core@^0.8.1":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@react-rxjs/core/-/core-0.8.2.tgz#bbb47c2172383f289a3bef75b9df7c5cb4f7e46f"
+  integrity sha512-rnppDm3NwkKkw72UZ6aoR5pto0CdLrM0m11CvbLYo6yqEAJfywgk8pj3YOT+GaEms9AFf9Q9ZB+9gbBhkKe3hg==
 
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
