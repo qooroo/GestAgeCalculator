@@ -1,7 +1,7 @@
 .App {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
     height: 100vh;
     width: 100%;
     background-color: transparent;
@@ -21,6 +21,7 @@
     margin: 20px;
     border-radius: 30px;
     border: 8px solid white;
+    width: 512px;
 }
 
 .gest-input {
@@ -33,34 +34,6 @@
     text-align: right;
     margin-right: 20px;
     margin-top: 20px;
-}
-
-.birthday {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 1;
-    grid-row-end: 1;
-}
-
-.gest1 {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 2;
-    grid-row-end: 2;
-}
-
-.calcday {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 3;
-    grid-row-end: 3;
-}
-
-.gest2 {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 4;
-    grid-row-end: 4;
 }
 
 .datepick {

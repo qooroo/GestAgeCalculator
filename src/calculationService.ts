@@ -9,7 +9,9 @@ import {
   currentBirthGestDays$,
   currentDateGestWeeks$,
   currentDateGestDays$,
-  GestAge
+  GestAge,
+  totalDays,
+  onCalcDayChange
 } from './state'
 import { LocalDate, ChronoUnit } from 'js-joda'
 import { combineLatest } from 'rxjs'
@@ -30,8 +32,8 @@ export class CalculationService {
           const birthday = x[1]
           const gestAgeAtBirth = {weeks: x[2], days: x[3]} as GestAge
           const targetDay = x[4]
-          const targetLocalDate = LocalDate.of(targetDay.getFullYear(), targetDay.getMonth(), targetDay.getDate())
-          const birthdayLocalDate = LocalDate.of(birthday.getFullYear(), birthday.getMonth(), birthday.getDate())
+          const targetLocalDate = LocalDate.of(targetDay.getFullYear(), targetDay.getMonth() + 1, targetDay.getDate())
+          const birthdayLocalDate = LocalDate.of(birthday.getFullYear(), birthday.getMonth() + 1, birthday.getDate())
 
           const daysSinceBirthday = ChronoUnit.DAYS.between(birthdayLocalDate, targetLocalDate)
 
@@ -48,6 +50,23 @@ export class CalculationService {
 
           if (targetGestAgeDays !== x[6]) {
             onDateGestDaysChange(targetGestAgeDays)
+          }
+        }
+        else if (x[0] === Target.DateAtGestAge) {
+          const birthday = x[1]
+          const gestAgeAtBirth = {weeks: x[2], days: x[3]} as GestAge
+          const birthdayLocalDate = LocalDate.of(birthday.getFullYear(), birthday.getMonth() + 1, birthday.getDate())
+          const targetGestAge = {weeks: x[5], days: x[6]} as GestAge
+          const daysSinceBirthday = totalDays(targetGestAge) - totalDays(gestAgeAtBirth)
+
+          const targetLocalDate = birthdayLocalDate.plusDays(daysSinceBirthday)
+          const targetDate = new Date(targetLocalDate.year(), targetLocalDate.monthValue() - 1, targetLocalDate.dayOfMonth())
+
+          if (targetDate.getFullYear !== x[4].getFullYear
+              || targetDate.getMonth() !== x[4].getMonth()
+              || targetDate.getDate() !== x[4].getDate()) {
+            console.log(`calculated date at gest age: ${targetDate}`)
+            onCalcDayChange(targetDate)
           }
         }
       })

@@ -1,14 +1,16 @@
 
-import { GestAge } from './state'
-
-export const GestationalAgeForm: React.FC<{ label: string, weeks: number, onWeeksChange: any, days: number, onDaysChange: any }> = (x) => {
-    return (
+export const GestationalAgeForm: React.FC<{ label: string, weeksHook: () => number, onWeeksChange: any, daysHook: () => number, onDaysChange: any }> = (x) => {
+  
+  const weeks = x.weeksHook()
+  const days = x.daysHook()
+  
+  return (
       <div>
         <p className="label">{x.label}</p>
         <div>
-          <input className="gest-input" onChange={x.onWeeksChange} value={x.weeks}></input>
+          <input className="gest-input" onChange={x.onWeeksChange} value={weeks}></input>
           Weeks
-          <input className="gest-input" onChange={x.onDaysChange} value={x.days}></input>
+          <input className="gest-input" onChange={x.onDaysChange} value={days}></input>
           Days
         </div>
       </div>

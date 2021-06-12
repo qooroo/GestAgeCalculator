@@ -12,6 +12,10 @@ export interface GestAge {
     days: number
 }
 
+export function totalDays(ga: GestAge): number {
+    return (ga.weeks * 7) + ga.days
+}
+
 export const INITIAL_BIRTH_GEST_WEEKS = 28
 export const INITIAL_BIRTH_GEST_DAYS = 0
 
@@ -43,7 +47,6 @@ export const [useCurrentBirthday, currentBirthday$] = bind(birthday$, new Date()
 const calcDaySubject = new Subject<Date>()
 const calcDay$ = calcDaySubject.pipe(startWith(new Date()))
 export const onCalcDayChange = (calcDay: Date) => {
-    onCalcTargetChange(Target.GestAgeAtDate)
     calcDaySubject.next(calcDay)
 }
 

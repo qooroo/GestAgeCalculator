@@ -14,7 +14,7 @@ import {
   Target,
   useCurrentCalcDay,
   onCalcDayChange,
-  onCalcTargetChange,
+  onCalcTargetChange
 } from './state'
 import { CalculationService } from './calculationService';
 import { CalculationDatePicker } from './CalculationDatePicker';
@@ -44,46 +44,51 @@ const onDateGestAgeDaysChanged: ChangeHandler = (e) => {
   onDateGestDaysChange(Number(e.target.value))
 }
 
+const onCalcDayUserChanged = (d: Date) => {
+  onCalcTargetChange(Target.GestAgeAtDate)
+  onCalcDayChange(d)
+}
+
 function App() {
 
   const birthGestWeeks = useCurrentBirthGestWeeks()
   const birthGestDays = useCurrentBirthGestDays()
   const dateGestWeeks = useCurrentDateGestWeeks()
   const dateGestDays = useCurrentDateGestDays()
-  const currentBirthday = useCurrentBirthday()
-  const currentCalcDay = useCurrentCalcDay()
+
+  const ageDays = ((dateGestWeeks * 7) + dateGestDays) - ((birthGestWeeks * 7) + birthGestDays)
 
   return (
     <div className="App">
-      <div className="section birthday">
+      <div className="section">
         <CalculationDatePicker
           label="Birthday"
-          selected={currentBirthday}
+          valueHook={useCurrentBirthday}
           onChange={(d: Date) => onBirthdayChange(d)} />
       </div>
-      <div className="section gest1">
+      <div className="section">
         <GestationalAgeForm
           label="Gestational age at birth"
           onWeeksChange={onBirthGestAgeWeeksChanged}
           onDaysChange={onBirthGestAgeDaysChanged}
-          weeks={birthGestWeeks}
-          days={birthGestDays}
+          weeksHook={useCurrentBirthGestWeeks}
+          daysHook={useCurrentBirthGestDays}
            />
       </div>
-      <div className="section calcday">
+      <div className="section">
         <CalculationDatePicker
           label="Calculation date"
-          selected={currentCalcDay}
-          onChange={(d: Date) => onCalcDayChange(d)} />
-        <p>total days old: </p>
+          valueHook={useCurrentCalcDay}
+          onChange={onCalcDayUserChanged} />
+        <p>age: {ageDays} days</p>
       </div>
-      <div className="section gest2">
+      <div className="section">
         <GestationalAgeForm
           label="Corrected gestational age"
           onWeeksChange={onDateGestAgeWeeksChanged}
           onDaysChange={onDateGestAgeDaysChanged}
-          weeks={dateGestWeeks}
-          days={dateGestDays} />
+          weeksHook={useCurrentDateGestWeeks}
+          daysHook={useCurrentDateGestDays} />
       </div>
     </div>
   );
