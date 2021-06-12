@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/GestAgeCalculator/static/css/main.b1682ebc.chunk.css",
-    "main.js": "/GestAgeCalculator/static/js/main.fead4c7d.chunk.js",
-    "main.js.map": "/GestAgeCalculator/static/js/main.fead4c7d.chunk.js.map",
+    "main.js": "/GestAgeCalculator/static/js/main.bc6c3bf7.chunk.js",
+    "main.js.map": "/GestAgeCalculator/static/js/main.bc6c3bf7.chunk.js.map",
     "runtime-main.js": "/GestAgeCalculator/static/js/runtime-main.b3b94434.js",
     "runtime-main.js.map": "/GestAgeCalculator/static/js/runtime-main.b3b94434.js.map",
     "static/css/2.496dcee5.chunk.css": "/GestAgeCalculator/static/css/2.496dcee5.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.496dcee5.chunk.css",
     "static/js/2.0828ad08.chunk.js",
     "static/css/main.b1682ebc.chunk.css",
-    "static/js/main.fead4c7d.chunk.js"
+    "static/js/main.bc6c3bf7.chunk.js"
   ]
 }
