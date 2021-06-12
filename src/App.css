@@ -12,14 +12,14 @@
 }
 
 .section {
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-family: "Comic Sans MS", "Comic Sans", Georgia;
     color: white;
     font-size: x-large;
     padding: 5%;
     
     background-color: rgba(255, 192, 203, 0.8);
     margin: 1%;
-    border-radius: 2%;
+    border-radius: 20px;
     border: 3px solid white;
     width: 96%;
 }
@@ -27,7 +27,7 @@
 .gest-input {
     background-color: transparent;
     border: transparent;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-family: "Comic Sans MS", "Comic Sans", Georgia;
     color: white;
     font-size: xx-large;
     width: 20%;
@@ -37,19 +37,31 @@
 }
 
 .datepick {
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-family: "Comic Sans MS", "Comic Sans", Georgia;
     color: white;
     font-size: x-large;
     padding: 2%;
     width: 70%;
     background-color: pink;
     margin: 5%;
-    border-radius: 5%;
-    border: 5px solid white;
+    border-radius: 10px;
+    border: 3px solid white;
 }
 
 .label {
     /* text-align: right; */
     font-size: medium;
     margin-bottom: 2%;
+}
+
+.title {
+    font-size: large;
+    color: white;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.footer {
+    font-size: small;
+    color: white;
 }

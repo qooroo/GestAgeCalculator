@@ -60,6 +60,10 @@ function App() {
 
   return (
     <div className="App">
+      <div className="title">
+        <p >Nicola's AMAZING</p>
+        <p> Gestational Age Calculator</p>
+      </div>
       <div className="section">
         <CalculationDatePicker
           label="Birthday"
@@ -73,7 +77,7 @@ function App() {
           onDaysChange={onBirthGestAgeDaysChanged}
           weeksHook={useCurrentBirthGestWeeks}
           daysHook={useCurrentBirthGestDays}
-           />
+        />
       </div>
       <div className="section">
         <CalculationDatePicker
@@ -90,6 +94,7 @@ function App() {
           weeksHook={useCurrentDateGestWeeks}
           daysHook={useCurrentDateGestDays} />
       </div>
+      <p className="footer">v0.0.2</p>
     </div>
   );
 }
