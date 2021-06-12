@@ -15,13 +15,13 @@
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     color: white;
     font-size: x-large;
-    padding: 10px;
+    padding: 5%;
     
     background-color: rgba(255, 192, 203, 0.8);
-    margin: 20px;
-    border-radius: 30px;
-    border: 8px solid white;
-    width: 512px;
+    margin: 1%;
+    border-radius: 2%;
+    border: 3px solid white;
+    width: 96%;
 }
 
 .gest-input {
@@ -30,26 +30,26 @@
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     color: white;
     font-size: xx-large;
-    width: 100px;
+    width: 20%;
     text-align: right;
-    margin-right: 20px;
-    margin-top: 20px;
+    margin-right: 5%;
+    margin-top: 5%;
 }
 
 .datepick {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     color: white;
     font-size: x-large;
-    padding: 10px;
-    
+    padding: 2%;
+    width: 70%;
     background-color: pink;
-    margin: 20px;
-    border-radius: 30px;
-    border: 8px solid white;
+    margin: 5%;
+    border-radius: 5%;
+    border: 5px solid white;
 }
 
 .label {
     /* text-align: right; */
     font-size: medium;
-    margin-bottom: 15px;
+    margin-bottom: 2%;
 }
