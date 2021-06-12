@@ -11,6 +11,7 @@ export const GestationalAgeForm: React.FC<{ label: string, weeksHook: () => numb
 
     if (isNaN(newValue) || newValue < 0 || newValue > 6) {
       event.target.value = days.toString()
+      event.target.select()
       return;
     }
     
@@ -22,6 +23,7 @@ export const GestationalAgeForm: React.FC<{ label: string, weeksHook: () => numb
 
     if (isNaN(newValue) || newValue < 0 || newValue > 99) {
       event.target.value = weeks.toString()
+      event.target.select()
       return;
     }
     
