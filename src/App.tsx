@@ -94,7 +94,11 @@ function App() {
           weeksHook={useCurrentDateGestWeeks}
           daysHook={useCurrentDateGestDays} />
       </div>
-      <p className="footer">v0.2.2</p>
+      <div className="footer">
+      <p>v0.2.2</p>
+      <p>Copyright 2021 Qicola Enterprises</p>
+      <p>no unicorns were harmed in the making of this calculator</p>
+      </div>
     </div>
   );
 }

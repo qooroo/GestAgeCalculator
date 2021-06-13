@@ -1,6 +1,6 @@
 {
   "homepage": "http://qooroo.github.io/GestAgeCalculator",
-  "name": "my-app",
+  "name": "ga-calc",
   "version": "0.2.2",
   "private": true,
   "dependencies": {
