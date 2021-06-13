@@ -95,9 +95,8 @@ function App() {
           daysHook={useCurrentDateGestDays} />
       </div>
       <div className="footer">
-      <p>v0.2.2</p>
-      <p>Copyright 2021 Qicola Enterprises</p>
-      <p>no unicorns were harmed in the making of this calculator</p>
+        <p>v0.2.2 Copyright MMXXI</p>
+        <p>0 unicorns were harmed in the making of this app</p>
       </div>
     </div>
   );
