@@ -84,7 +84,7 @@ function App() {
           label="Calculation date"
           valueHook={useCurrentCalcDay}
           onChange={onCalcDayUserChanged} />
-        <p>age: {ageDays} days</p>
+        <p className="note">age: {ageDays} days</p>
       </div>
       <div className="section">
         <GestationalAgeForm
@@ -94,7 +94,7 @@ function App() {
           weeksHook={useCurrentDateGestWeeks}
           daysHook={useCurrentDateGestDays} />
       </div>
-      <p className="footer">v0.2.1</p>
+      <p className="footer">v0.2.2</p>
     </div>
   );
 }

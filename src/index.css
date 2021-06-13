@@ -3,8 +3,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Georgia;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("unuicorn.png");
-  background-repeat: repeat;
+  background-image: url("uni.jpg");
+  /* background-repeat: repeat; */
 }
 
 code {

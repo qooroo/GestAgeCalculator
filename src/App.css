@@ -14,8 +14,9 @@
 .section {
     color: white;
     font-size: x-large;
-    padding: 5%;
-    
+    padding: 10px;
+    max-width: 480px;
+    max-height: 150px;
     background-color: rgba(255, 192, 203, 0.8);
     margin: 1%;
     border-radius: 20px;
@@ -46,9 +47,13 @@
 }
 
 .label {
-    /* text-align: right; */
     font-size: medium;
-    margin-bottom: 2%;
+    /* margin-bottom: 2%; */
+}
+
+.note {
+    font-size: medium;
+    text-align: right;
 }
 
 .title {
