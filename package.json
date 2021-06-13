@@ -1,7 +1,7 @@
 {
   "homepage": "http://qooroo.github.io/GestAgeCalculator",
   "name": "ga-calc",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "dependencies": {
     "@gregfrench/react-native-wheel-picker": "^1.2.14",
