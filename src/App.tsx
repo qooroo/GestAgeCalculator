@@ -94,7 +94,7 @@ function App() {
           weeksHook={useCurrentDateGestWeeks}
           daysHook={useCurrentDateGestDays} />
       </div>
-      <p className="footer">v0.0.4</p>
+      <p className="footer">v0.2.1</p>
     </div>
   );
 }

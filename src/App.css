@@ -12,7 +12,6 @@
 }
 
 .section {
-    font-family: "Comic Sans MS", "Comic Sans", Georgia;
     color: white;
     font-size: x-large;
     padding: 5%;
@@ -27,7 +26,6 @@
 .gest-input {
     background-color: transparent;
     border: transparent;
-    font-family: "Comic Sans MS", "Comic Sans", Georgia;
     color: white;
     font-size: xx-large;
     width: 20%;
@@ -37,7 +35,6 @@
 }
 
 .datepick {
-    font-family: "Comic Sans MS", "Comic Sans", Georgia;
     color: white;
     font-size: x-large;
     padding: 2%;
