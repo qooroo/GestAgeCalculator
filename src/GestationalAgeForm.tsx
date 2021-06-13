@@ -1,6 +1,12 @@
 
 const handleFocus = (event: any) => event.target.select();
 
+const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  if (event.key == "Enter") {
+    event.currentTarget.blur()
+  }
+};
+
 export const GestationalAgeForm: React.FC<{ label: string, weeksHook: () => number, onWeeksChange: any, daysHook: () => number, onDaysChange: any }> = (x) => {
 
   const weeks = x.weeksHook()
@@ -14,7 +20,7 @@ export const GestationalAgeForm: React.FC<{ label: string, weeksHook: () => numb
       event.target.select()
       return;
     }
-    
+
     hook(event)
   }
 
@@ -26,7 +32,7 @@ export const GestationalAgeForm: React.FC<{ label: string, weeksHook: () => numb
       event.target.select()
       return;
     }
-    
+
     hook(event)
   }
 
@@ -37,12 +43,14 @@ export const GestationalAgeForm: React.FC<{ label: string, weeksHook: () => numb
         <input
           className="gest-input"
           onFocus={handleFocus}
+          onKeyPress={onKeyPress}
           onChange={e => onWeeksChange(e, x.onWeeksChange)}
           value={weeks}></input>
         Weeks
         <input
           className="gest-input"
           onFocus={handleFocus}
+          onKeyPress={onKeyPress}
           onChange={e => onDaysChange(e, x.onDaysChange)}
           value={days}></input>
         Days
