@@ -95,8 +95,8 @@ function App() {
           daysHook={useCurrentDateGestDays} />
       </div>
       <div className="footer">
-        <p>v0.2.3 Copyright MMXXI</p>
-        <p>0 unicorns were harmed in the making of this app</p>
+        <p>v0.2.3</p>
+        <p>Copyright 2021</p>
       </div>
     </div>
   );
