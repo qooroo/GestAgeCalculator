@@ -25,14 +25,15 @@
 }
 
 .gest-input {
-    background-color: transparent;
-    border: transparent;
+    background-color: pink;
+    padding: 5px;
+    border-radius: 10px;
+    border: 3px solid white;
     color: white;
-    font-size: xx-large;
-    width: 20%;
+    font-size: x-large;
+    width: 62px;
     text-align: right;
-    margin-right: 5%;
-    margin-top: 5%;
+    margin: 10px
 }
 
 .datepick {

@@ -61,8 +61,7 @@ function App() {
   return (
     <div className="App">
       <div className="title">
-        <p >Nicola's AMAZING</p>
-        <p> Gestational Age Calculator</p>
+        <p >Nicola's GA Calculator</p>
       </div>
       <div className="section">
         <CalculationDatePicker
